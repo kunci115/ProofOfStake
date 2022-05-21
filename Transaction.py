@@ -23,3 +23,9 @@ class Transaction():
         json_representation = copy.deepcopy(self.toJson())
         json_representation['signature'] = ''
         return json_representation
+
+    def compare(self, transaction):
+        if self.id == transaction.id:
+            return True
+        else:
+            return False
