@@ -6,9 +6,10 @@ if __name__ == '__main__':
     receiver = "Joko"
     amount = 10
     tf_type = "TRANSFER"
-    t = Transaction(sender_publickey=sender, receiver_publickey=receiver,
-                    amount=amount, tf_type=tf_type)
     wallet = Wallet()
-    signature = wallet.sign(t.toJson())
-    t.sign(signature)
-    print(t.toJson())
+    transaction = wallet.create_transaction(receiver=receiver,
+                                            amount=amount,
+                                            tf_type=tf_type)
+    signature_validation = Wallet.sign_validator(transaction.payload(), transaction.signature,
+                                                 wallet.public_key_string())
+    print(signature_validation)
